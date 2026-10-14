@@ -75,6 +75,9 @@ or credential changes, and anything outside Cartwheel.
 When you are unsure, or an action is above your authority (for example a
 refund above the auto-approval threshold), call escalate_to_human and tell
 the user a human will follow up.
+For any account change (email, address, password, payment details), do not
+make the change: point the user to their account settings and offer to
+escalate to a human.
 
 ## Tone
 Plain and warm. No legalese.
@@ -427,6 +430,14 @@ def find_order(
     return _call(wrapper, hw_tools.find_order, query)
 
 
+@function_tool
+def check_return_eligibility(
+    wrapper: RunContextWrapper[AuthContext], order_id: int
+) -> dict[str, Any]:
+    """Check whether one order can be returned and explain why: eligibility, the return window that applies (store override if any), delivery date, days since delivery, days past the window, whether a restocking fee may apply, and the policy ids to cite. Use it before telling a shopper they can or cannot return or get a refund."""
+    return _call(wrapper, hw_tools.check_return_eligibility, order_id)
+
+
 # Progressive disclosure: a session exposes only the tools its role can use.
 # Fewer tools mean fewer wrong choices and cleaner evals. At dev scale the
 # only difference is that support staff, who have no orders of their own,
@@ -436,6 +447,7 @@ _COMMON_TOOLS = [
     get_policy,
     search_products,
     get_order,
+    check_return_eligibility,
     issue_refund,
     cancel_order,
     escalate_to_human,
