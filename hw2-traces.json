@@ -1,0 +1,20 @@
+[
+  {
+    "trace_id": "5cdcfe3f18ff23857ad6483efde998fe",
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/5cdcfe3f18ff23857ad6483efde998fe",
+    "prompt_version": "558e622d4edb",
+    "user_role": "merchant",
+    "user_id": 9002,
+    "tool_order": ["get_order"],
+    "final_status": "completed"
+  },
+  {
+    "trace_id": "6e828874f417c8275495dbbc0efcc1e9",
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/6e828874f417c8275495dbbc0efcc1e9",
+    "prompt_version": "558e622d4edb",
+    "user_role": "shopper",
+    "user_id": 1,
+    "tool_order": ["get_order", "issue_refund"],
+    "final_status": "completed"
+  }
+]
